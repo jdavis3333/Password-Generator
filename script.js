@@ -2,14 +2,24 @@
 
 var complexity = 0;
 
+
 //User selects how many characters between 8 and 128
 function char () {
     prompt("How many characters would you like for your password (between 8 and 128)");
-    return char.push(complexity);
+    if (char > 128 || char < 8){
+        tryAgain()
+    }else{
+        generate()
+    };
 }    
 
+function tryAgain () {
+    prompt("Invalid option. How many characters would you like for your password (between 8 and 128)");
+}
+
+
 function generate () {
-        let complexity = document.getElementById("char").value;
+        // let complexity = document.getElementById("char").value;
 
         var capARR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var lowerARR = "abcdefghijklmnopqrstuvwxyz";
