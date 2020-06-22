@@ -1,39 +1,69 @@
 //
 
-var complexity = 0;
+let complexity = 0;
+let passwordLength = 0;
+let passwordCharacters = []
 
+let cap = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let lower = "abcdefghijklmnopqrstuvwxyz";
+let num = "0123456789";
+let spChar = "#,$%&()*+-./:;<=>?@[\]^_{|}~";
 
 //User selects how many characters between 8 and 128
-function char () {
-    prompt("How many characters would you like for your password (between 8 and 128)");
-    if (char > 128 || char < 8){
-        tryAgain()
+function char() {
+    passwordLength = prompt("How many characters would you like for your password (between 8 and 128)");
+    if (passwordLength > 128 || passwordLength < 8){
+        char()
     }else{
-        generate()
+        userChoice()
     };
 }    
 
-function tryAgain () {
+function tryAgain() {
     prompt("Invalid option. How many characters would you like for your password (between 8 and 128)");
 }
+
+function userChoice() {
+    let upperCase = confirm("would you like to have upper case?")
+    let lowerCase = confirm("would you like to have lower case?")
+    let specialCharacters = confirm("would you like to have special characters?")
+    let numbers = confirm("would you like to have numbers?")
+    if (!upperCase && !lowerCase && !specialCharacters && !numbers) {
+        alert("at least one must be selected");
+        userChoice();
+    }
+    else{
+        if(upperCase) {
+            passwordCharacters += cap;
+        }
+        if(lowerCase) {
+            passwordCharacters += lower;
+        }
+        if(specialCharacters) {
+            passwordCharacters += spChar;
+        }
+        if(numbers) {
+            passwordCharacters += num;
+        }
+        generate();
+    }
+}
+
+
 
 
 function generate () {
         // let complexity = document.getElementById("char").value;
-
-        var capARR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var lowerARR = "abcdefghijklmnopqrstuvwxyz";
-        var numbers = "0123456789";
-        var spChar = "#,$,%,&,,(,),*,+,,,-,.,/,:,;<,=,>,?,@,[,\,],^,_,,{,|,},~,";
-
         let password = ""
 
 
-            for(var i = 0; i > 8 && i < 128; i++){
-            password = password + values.charAt(Math.floor(Math.random() * Math.floor(capARR.length - 1)));
+            for(var i = 0; i < passwordLength; i++){
+                let index = Math.floor(Math.random()*passwordCharacters.length)
+            password = password + passwordCharacters [index]
             }
+            console.log(password);
+    document.getElementById("text").value = password  
 
-    document.getElementById("textarea").value = password  
 }
 
 
